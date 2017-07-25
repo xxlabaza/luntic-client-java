@@ -30,7 +30,7 @@ Instance updated = discovery.update();
 
 // updates last modified time and meta data of client's instance
 // in Luntic discovery service
-Map<String, Object> newMetadata = new HashMap<>(4, 1.F);
+Map<String, Object> newMetadata = new HashMap<>();
 ...
 Instance updated = discovery.update(newMetadata);
 
