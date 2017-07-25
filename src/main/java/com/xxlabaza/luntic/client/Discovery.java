@@ -160,7 +160,13 @@ public class Discovery {
                        ? api.create(group, meta)
                        : api.create(group);
         } catch (RetryableException ex) {
-            throw new DiscoveryException("Couldn't register to discovery service");
+            throw new DiscoveryException("Couldn't register to discovery service. Reason: " + ex.getMessage());
+        }
+
+        if (response.status() != 201) {
+            String message = String.format("Couldn't register to discovery service. Status: %d, reason: %s",
+                                           response.status(), response.reason());
+            throw new DiscoveryException(message);
         }
 
         String location = response.headers().entrySet().stream()
