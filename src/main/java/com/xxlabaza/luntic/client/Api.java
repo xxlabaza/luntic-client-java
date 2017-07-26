@@ -25,6 +25,7 @@ import feign.Response;
 import feign.Retryer.Default;
 import feign.jackson.JacksonDecoder;
 import feign.jackson.JacksonEncoder;
+import feign.okhttp.OkHttpClient;
 import java.util.List;
 import java.util.Map;
 
@@ -77,6 +78,7 @@ interface Api {
             url = "http://" + url;
         }
         return Feign.builder()
+                .client(new OkHttpClient())
                 .encoder(new JacksonEncoder())
                 .decoder(new JacksonDecoder(mapper))
                 .decode404()
